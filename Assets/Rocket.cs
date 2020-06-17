@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
+
+    [SerializeField] float mainThrust = 100f;
+    [SerializeField] float rcsThrust = 100f;
+
+
     Rigidbody rigidBody;
     AudioSource audioSource;
 
@@ -20,14 +25,32 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ProcessInput();
+        Thrust();
+        Rotate();
     }
-
-    private void ProcessInput()
+    void OnCollisionEnter(Collision collision)
     {
+        switch (collision.gameObject.tag)
+        {
+            case "Friendly":
+                // do nothing
+                print("Ok"); //todo remove
+                break;
+            case "Fuel":
+                print("Fuel");
+                break;
+            default:
+                print("Dead");
+                // kill player
+                break;
+        }
+    }
+    private void Thrust()
+    {
+        float thrustThisFrame = mainThrust * Time.deltaTime;
         if (Input.GetKey(KeyCode.Space)) // Can thrust while rotating.
         {
-            rigidBody.AddRelativeForce(Vector3.up);
+            rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
             if (!audioSource.isPlaying) // so it doesn't layer
             {
                 audioSource.Play();
@@ -39,16 +62,23 @@ public class Rocket : MonoBehaviour
         {
             audioSource.Stop();
         }
+    }
+    private void Rotate()
+    {
+        rigidBody.freezeRotation = true; //take manual control of rotation
+
+        float rotationThisFrame = rcsThrust * Time.deltaTime;
+
         if (Input.GetKey(KeyCode.A))
-        {
-            transform.Rotate(Vector3.forward);
+        {            transform.Rotate(Vector3.forward * rotationThisFrame);
             print("Rotating left");
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(-Vector3.forward);
+            transform.Rotate(-Vector3.forward * rotationThisFrame);
             print("Rotating right");
         }
 
+        rigidBody.freezeRotation = false; // resume physics control of rotation
     }
 }
