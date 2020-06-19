@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 948832266}
   - component: {fileID: 65560991716520513}
   m_Layer: 0
-  m_Name: Rocket SHip
+  m_Name: Rocket Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -455,8 +455,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7f7fa2f949f69749ae7490d3f3b824e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainThrust: 1075
-  rcsThrust: 265
+  mainThrust: 1100
+  rcsThrust: 200
 --- !u!1 &8837187278181018819
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,7 +485,7 @@ Transform:
   m_GameObject: {fileID: 8837187278181018819}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 4.06, z: 0}
-  m_LocalScale: {x: 1.0366539, y: 0.843685, z: 1.036654}
+  m_LocalScale: {x: 1.0573869, y: 0.8605586, z: 1.0573871}
   m_Children: []
   m_Father: {fileID: 7064485806588688017}
   m_RootOrder: 3
