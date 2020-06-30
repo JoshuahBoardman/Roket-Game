@@ -100,7 +100,7 @@ public class Rocket : MonoBehaviour
     private void LoadFirstLevel()
     {
         SceneManager.LoadScene(0);
-    }
+    }  
 
     private void RespondingToDevInput()
     {
@@ -123,9 +123,14 @@ public class Rocket : MonoBehaviour
         }
         else
         {
-            audioSource.Stop();
-            mainEngineParticles.Stop();
+            StopApplyingTHrust();
         }
+    }
+
+    private void StopApplyingTHrust()
+    {
+        audioSource.Stop();
+        mainEngineParticles.Stop();
     }
 
     private void ApplyThrust()
@@ -141,7 +146,7 @@ public class Rocket : MonoBehaviour
 
     private void Rotate()
     {
-        rigidBody.freezeRotation = true; //take manual control of rotation
+        rigidBody.angularVelocity = Vector3.zero; // remove rotation due to physics
 
         float rotationThisFrame = rcsThrust * Time.deltaTime;
 
@@ -155,6 +160,6 @@ public class Rocket : MonoBehaviour
             print("Rotating right");
         }
 
-        rigidBody.freezeRotation = false; // resume physics control of rotation
+
     }
 }
